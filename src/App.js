@@ -1,47 +1,31 @@
 import { useEffect, useState } from 'react'
+import Movie from './Movie'
 
 function App() {
   const [loading, setLoading] = useState(true)
-  const [coins, setCoins] = useState([])
-  const [dollars, setDollars] = useState('')
-  const onChange = e => {
-    setDollars(e.target.value)
-  }
-  const onSubmit = e => {
-    e.preventDefault()
-    if (dollars === '') {
-      return
-    }
-    setDollars('')
+  const [movies, setMovies] = useState([])
+  const getMovies = async () => {
+    const json = await (
+      await fetch('https://yts.mx/api/v2/list_movies.json')
+    ).json()
+    setMovies(json.data.movies)
+    setLoading(false)
   }
   useEffect(() => {
-    fetch('https://api.coinpaprika.com/v1/tickers')
-      .then(response => response.json())
-      .then(json => setCoins(json))
-    setLoading(false)
+    getMovies()
   }, [])
+  console.log(movies)
   return (
     <div>
-      <h1>The Coins!{ loading ? "" : `(${coins.length})`}</h1>
-      {loading ? <strong>'Loading ...'</strong> : null}
-      <form onSubmit={onSubmit}>
-        <input
-          type="text"
-          onChange={onChange}
-          value={dollars}
-          placeholder="How much money do you have?"
-          style={{ width: 220 }}
-        />
-        <button style={{ marginLeft: 10 }}>Click !</button>
-      </form>
-      <ul>
-        {coins.map(coin => (
-          <li key={coin.id}>
-            {coin.name} ({coin.symbol}) :{' '}
-            {dollars ? dollars / (coin.quotes.USD.price / 42905.07) : 0} BTC
-          </li>
-        ))}
-      </ul>
+      {loading ? (
+        <h1>Loading...</h1>
+      ) : (
+        <div>
+          {movies.map(movie => (
+            <Movie key={movie.id} img={movie.background_image_original} title={movie.title} genres={movie.genres} summary={movie.summary} />
+          ))}
+        </div>
+      )}
     </div>
   )
 }
