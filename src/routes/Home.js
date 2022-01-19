@@ -15,7 +15,7 @@ function Home() {
     getMovies()
   }, [])
   console.log(movies)
-  return (
+  return ( 
     <div>
       {loading ? (
         <h1>Loading...</h1>
@@ -24,6 +24,7 @@ function Home() {
           {movies.map(movie => (
             <Movie
               key={movie.id}
+              id={movie.id}
               coverImg={movie.background_image_original}
               title={movie.title}
               genres={movie.genres}
@@ -35,5 +36,6 @@ function Home() {
     </div>
   )
 }
+
 
 export default Home
