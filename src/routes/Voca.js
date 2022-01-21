@@ -1,12 +1,14 @@
-import Hello from '../components/Hello'
+import Header from '../components/Header'
+import DayList from '../components/DayList'
+import Day from '../components/Day'
 import Styles from './Voca.module.css'
 
 const Voca = () => {
   return (
-    <div>
-      <Hello age={10} />
-      <Hello age={20} />
-      <Hello age={30} />
+    <div className={Styles.Voca}>
+      <Header header={Styles.header} menu={Styles.menu} link={Styles.link} />
+      <DayList list={Styles.listDay} />
+      <Day />
     </div>
   )
 }
