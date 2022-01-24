@@ -104,23 +104,23 @@ button {
   background-color: dodgerblue;
 }
 
-.input_area {
+.inputArea {
   margin-bottom: 10px;
 }
 
-.input_area label {
+.inputArea label {
   display: block;
   margin-bottom: 10px;
 }
 
-.input_area input {
+.inputArea input {
   width: 400px;
   height: 40px;
   font-size: 20px;
   padding: 0 10px;
 }
 
-.input_area select {
+.inputArea select {
   width: 400px;
   height: 40px;
   font-size: 20px;

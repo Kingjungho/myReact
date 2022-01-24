@@ -8,8 +8,7 @@ const useFetch = ( url ) => {
   }
   useEffect(() => {
     getWords()
-  }, [url])
-
+  }, [])
   return data
 } 
 
